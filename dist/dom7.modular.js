@@ -3,13 +3,13 @@
  * Minimalistic JavaScript library for DOM manipulation, with a jQuery-compatible API
  * http://framework7.io/docs/dom.html
  *
- * Copyright 2020, Vladimir Kharlampidi
+ * Copyright 2021, Vladimir Kharlampidi
  * The iDangero.us
  * http://www.idangero.us/
  *
  * Licensed under MIT
  *
- * Released on: May 15, 2020
+ * Released on: November 15, 2021
  */
 import { document, window } from 'ssr-window';
 
@@ -35,7 +35,7 @@ function $(selector, context) {
     }
   }
   if (selector) {
-      // String
+    // String
     if (typeof selector === 'string') {
       let els;
       let tempParent;
@@ -58,6 +58,9 @@ function $(selector, context) {
           els = [document.getElementById(selector.trim().split('#')[1])];
         } else {
           // Other selectors
+          if (context && !context.querySelectorAll && context.length) {
+            context = context[0];
+          }
           els = (context || document).querySelectorAll(selector.trim());
         }
         for (i = 0; i < els.length; i += 1) {
